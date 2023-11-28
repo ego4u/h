@@ -41,3 +41,15 @@ func ReadLineByLine0(fileName string, lineHandle func(line []byte) error, maxLin
 	}
 	return nil
 }
+
+func FileExists(filename string) (bool, error) {
+	_, err := os.Stat(filename)
+	if err != nil {
+		if os.IsNotExist(err) {
+			return false, nil
+		}
+		return false, err
+	} else {
+		return true, nil
+	}
+}
